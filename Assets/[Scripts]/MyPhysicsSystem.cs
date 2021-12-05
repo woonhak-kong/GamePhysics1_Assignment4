@@ -219,6 +219,8 @@ public class MyPhysicsSystem : MonoBehaviour
                 //normalFirst = -1 * normalFirst;
                 float e = Mathf.Min(first.Bounciness, second.Bounciness);
                 Vector3 relativeVelocity = first.Velocity - second.Velocity;
+
+                // finding impulse
                 float j = (-1*(1 + e) * Vector3.Dot(relativeVelocity, normalFirst) ) /
                     (1 / first.Mass + 1 / second.Mass);
 

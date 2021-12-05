@@ -23,12 +23,12 @@ public class MyPhysicObject : MonoBehaviour
 
     public bool Pause = false;
 
-    public Vector3 up = new Vector3(0, 1, 0);
-    public Vector3 down = new Vector3(0, -1, 0);
-    public Vector3 left = new Vector3(-1, 0, 0);
-    public Vector3 right = new Vector3(1, 0, 0);
-    public Vector3 forward = new Vector3(0, 0, 1);
-    public Vector3 back = new Vector3(0, 0, -1);
+    public Vector3 up { get; } = new Vector3(0, 1, 0);
+    public Vector3 down { get; } = new Vector3(0, -1, 0);
+    public Vector3 left { get; } = new Vector3(-1, 0, 0);
+    public Vector3 right { get; } = new Vector3(1, 0, 0);
+    public Vector3 forward { get; } = new Vector3(0, 0, 1);
+    public Vector3 back { get; } = new Vector3(0, 0, -1);
 
 
     // Start is called before the first frame update
