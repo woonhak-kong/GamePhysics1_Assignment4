@@ -136,17 +136,7 @@ public class MyPhysicsSystem : MonoBehaviour
             // when the distance between two objects is less than the sum of two objects' radious, they collided.
             if(distanceBetweenObjs < first.GetRadius() + second.GetRadius())
             {
-                Vector3 normalFirst = subResult.normalized;
-                Vector3 normalVelocityFirst = normalFirst * Vector3.Dot(normalFirst, first.Velocity);
-                Vector3 tangentialVelocityFirst = first.Velocity - normalVelocityFirst;
-
-                Vector3 normalSecond = -normalFirst;
-                Vector3 normalVelocitySecond = normalSecond * Vector3.Dot(normalSecond, second.Velocity);
-                Vector3 tangentialVelocitySecond = second.Velocity - normalVelocitySecond;
-
-                first.Velocity = (normalVelocityFirst * (first.Mass - second.Mass) + normalVelocitySecond * (2 * second.Mass)) / (first.Mass + second.Mass) + tangentialVelocityFirst;
-                second.Velocity = (normalVelocitySecond * (second.Mass - first.Mass) + normalVelocityFirst * (2 * first.Mass)) / (first.Mass + second.Mass) + tangentialVelocitySecond;
-
+                SetCollisionResponse(first, second, subResult.normalized);
                 return true;
             }
         }
@@ -205,28 +195,7 @@ public class MyPhysicsSystem : MonoBehaviour
                         break;
 
                 }
-
-                //Vector3 normalFirst = subResult.normalized;
-                //Vector3 normalVelocityFirst = normalFirst * Vector3.Dot(normalFirst, first.Velocity);
-                //Vector3 tangentialVelocityFirst = first.Velocity - normalVelocityFirst;
-
-                //Vector3 normalSecond = -normalFirst;
-                //Vector3 normalVelocitySecond = normalSecond * Vector3.Dot(normalSecond, second.Velocity);
-                //Vector3 tangentialVelocitySecond = second.Velocity - normalVelocitySecond;
-
-                //first.Velocity = (normalVelocityFirst * (first.Mass - second.Mass) + normalVelocitySecond * (2 * second.Mass)) / (first.Mass + second.Mass) + tangentialVelocityFirst;
-                //second.Velocity = (normalVelocitySecond * (second.Mass - first.Mass) + normalVelocityFirst * (2 * first.Mass)) / (first.Mass + second.Mass) + tangentialVelocitySecond;
-                //normalFirst = -1 * normalFirst;
-                float e = Mathf.Min(first.Bounciness, second.Bounciness);
-                Vector3 relativeVelocity = first.Velocity - second.Velocity;
-
-                // finding impulse
-                float j = (-1*(1 + e) * Vector3.Dot(relativeVelocity, normalFirst) ) /
-                    (1 / first.Mass + 1 / second.Mass);
-
-                first.Velocity = first.Velocity + (j / first.Mass) * normalFirst;
-                second.Velocity = second.Velocity - (j / second.Mass) * normalFirst;
-
+                SetCollisionResponse(first, second, normalFirst);
                 return true;
             }
 
@@ -246,19 +215,8 @@ public class MyPhysicsSystem : MonoBehaviour
 
             if( distanceSquared < radiusSquared)
             {
-                //Vector3 normal = (first.GetNewPosition() - closestPoint).normalized;
-
                 Vector3 normalFirst = (first.GetNewPosition() - closestPoint).normalized;
-                Vector3 normalVelocityFirst = normalFirst * Vector3.Dot(normalFirst, first.Velocity);
-                Vector3 tangentialVelocityFirst = first.Velocity - normalVelocityFirst;
-
-                Vector3 normalSecond = -normalFirst;
-                Vector3 normalVelocitySecond = normalSecond * Vector3.Dot(normalSecond, second.Velocity);
-                Vector3 tangentialVelocitySecond = second.Velocity - normalVelocitySecond;
-
-                first.Velocity = (normalVelocityFirst * (first.Mass - second.Mass) + normalVelocitySecond * (2 * second.Mass)) / (first.Mass + second.Mass) + tangentialVelocityFirst;
-                second.Velocity = (normalVelocitySecond * (second.Mass - first.Mass) + normalVelocityFirst * (2 * first.Mass)) / (first.Mass + second.Mass) + tangentialVelocitySecond;
-
+                SetCollisionResponse(first, second, -normalFirst);
 
                 return true;
             }
@@ -273,21 +231,7 @@ public class MyPhysicsSystem : MonoBehaviour
             float distanceBetweenObjs = Vector3.Dot(upvectorOfPlane, positionVectorOfSphere);
             if(distanceBetweenObjs < second.GetRadius())
             {
-                // r+ d dot n
-                //float tmp = second.GetRadius() + Vector3.Dot(first.transform.up, -positionVectorOfSphere);
-                //float angle = Vector3.Angle(first.transform.right, second.Velocity);
-
-                //float deltaS = tmp / Mathf.Sin(angle) + 0.01f;
-                //Debug.Log("===" + deltaS);
-                //Vector3 paraVector = Vector3.Normalize(second.Velocity) * deltaS;
-                //second.transform.position = second.transform.position - paraVector;
-                // response
-                Vector3 normalVelocity =  -upvectorOfPlane * Vector3.Dot(second.Velocity, -upvectorOfPlane);
-                Vector3 tangentialVelocity = second.Velocity - normalVelocity;
-
-                second.Velocity = -normalVelocity + tangentialVelocity;
-
-
+                SetCollisionResponse(first, second, first.transform.up);
                 return true;
             }
 
@@ -296,22 +240,14 @@ public class MyPhysicsSystem : MonoBehaviour
         {
             Vector3 centerOfAABB = second.GetNewPosition();
             Vector3 extents = second.GetMax() - centerOfAABB;
-            //var r = extents.x * Math.abs( Plane.normal.x ) + extents.y * Math.abs( Plane.normal.y ) + extents.z * Math.abs( Plane.normal.z );
-            //var s = Plane.normal.dot(center) - Plane.constant;
-            //Math.abs( s ) <= r;
 
             float r = extents.x * Mathf.Abs(first.transform.up.x) + extents.y * Mathf.Abs(first.transform.up.y) + extents.z * Mathf.Abs(first.transform.up.z);
             var s = Vector3.Dot(first.transform.up, centerOfAABB) - Vector3.Dot(first.transform.up, first.GetNewPosition());
-            //s = Vector3.Dot(first.transform.up, centerOfAABB - first.GetNewPosition());
 
             if (Mathf.Abs(s) < r)
             {
 
-                //second.Pause = true;
-                Vector3 normalVelocity = -first.transform.up * Vector3.Dot(second.Velocity, -first.transform.up);
-                Vector3 tangentialVelocity = second.Velocity - normalVelocity;
-
-                second.Velocity = -normalVelocity + tangentialVelocity;
+                SetCollisionResponse(first, second, first.transform.up);
                 return true;
             }
         }
@@ -367,5 +303,25 @@ public class MyPhysicsSystem : MonoBehaviour
         }
 
         return result;
+    }
+
+    private void SetCollisionResponse(MyPhysicObject first, MyPhysicObject second, Vector3 normal)
+    {
+        float e = Mathf.Min(first.Bounciness, second.Bounciness);
+        Vector3 relativeVelocity = first.Velocity - second.Velocity;
+
+        // finding impulse
+        float j = (-1 * (1 + e) * Vector3.Dot(relativeVelocity, normal)) /
+            (1 / first.Mass + 1 / second.Mass);
+        Debug.Log("=== " + j);
+        if(!first.Lock)
+        {
+            first.Velocity = first.Velocity + (j / first.Mass) * normal;
+        }
+        if(!second.Lock)
+        {
+            second.Velocity = second.Velocity - (j / second.Mass) * normal;
+            Debug.Log("=== " + (j / second.Mass) * normal);
+        }
     }
 }

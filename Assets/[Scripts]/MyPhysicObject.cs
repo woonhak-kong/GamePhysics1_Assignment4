@@ -16,12 +16,15 @@ public class MyPhysicObject : MonoBehaviour
     public Vector3 Velocity;
     public CollisionShapeE shape;
     public float Bounciness;
-    float radius = 0.0f;
+    public bool Lock = false;
+
+
+    private float radius = 0.0f;
 
     private Vector3 PreviousPosition;
     public Vector3 NewPosition;
 
-    public bool Pause = false;
+    public bool Pause { get; set; } = false;
 
     public Vector3 up { get; } = new Vector3(0, 1, 0);
     public Vector3 down { get; } = new Vector3(0, -1, 0);
@@ -34,6 +37,11 @@ public class MyPhysicObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (shape == CollisionShapeE.PLANE)
+        {
+            // ground has huge mass
+            Mass = float.MaxValue;
+        }
         if (shape == CollisionShapeE.SPHERE)
         {
             radius = transform.localScale.x / 2;
@@ -49,18 +57,19 @@ public class MyPhysicObject : MonoBehaviour
         {
             if (!Pause)
             {
+                if (!Lock)
+                {
+                    PreviousPosition = transform.position;
+                    transform.position = NewPosition;
 
-                PreviousPosition = transform.position;
-                transform.position = NewPosition;
 
 
+                    Velocity.y = Velocity.y + Vector3.down.y * MyPhysicsSystem.GRAVITY * Time.deltaTime;
+                    //Velocity.x = Velocity.x * Time.deltaTime * 0.001f;
+                    //Velocity.z = Velocity.z * Time.deltaTime * 0.001f;
 
-                Velocity.y = Velocity.y + Vector3.down.y * MyPhysicsSystem.GRAVITY * Time.deltaTime;
-                //Velocity.x = Velocity.x * Time.deltaTime * 0.001f;
-                //Velocity.z = Velocity.z * Time.deltaTime * 0.001f;
-
-                NewPosition = transform.position + Velocity * Time.deltaTime;
-
+                    NewPosition = transform.position + Velocity * Time.deltaTime;
+                }
             }
             //if (!Pause)
             //{
