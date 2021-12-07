@@ -69,7 +69,7 @@ public class MyPhysicObject : MonoBehaviour
                     //Velocity.x = Velocity.x * Time.deltaTime * 0.001f;
                     //Velocity.z = Velocity.z * Time.deltaTime * 0.001f;
                     NewPosition.x = transform.position.x + Velocity.x * Time.deltaTime;
-                    if(!(OnGround && Velocity.y < 0))
+
                         NewPosition.y = transform.position.y + Velocity.y * Time.deltaTime;
                     NewPosition.z = transform.position.z + Velocity.z * Time.deltaTime;
 
@@ -97,7 +97,29 @@ public class MyPhysicObject : MonoBehaviour
     public void Collision(MyPhysicObject otherObj)
     {
         //Debug.Log("Collision!! with " + otherObj.name);
-        NewPosition = transform.position;
+
+        if (OnGround)
+        {
+            //NewPosition.x = transform.position.x;
+            NewPosition.y = transform.position.y;
+            //NewPosition.z = transform.position.z;
+            //Debug.Log("==== ground and vel");
+        }
+        else
+        {
+            NewPosition = transform.position;
+            //Debug.Log("==== why??");
+        }
+        //if (!(OnGround && Velocity.y < 0))
+        //{
+        //    //NewPosition.x = transform.position.x;
+        //    NewPosition.y = transform.position.y;
+        //    //NewPosition.z = transform.position.z;
+        //}
+        //else
+        //{
+        //    NewPosition = transform.position;
+        //}
         //InitVelocity();
         if (shape != CollisionShapeE.PLANE)
         {
