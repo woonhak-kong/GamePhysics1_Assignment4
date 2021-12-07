@@ -55,6 +55,13 @@ public class MyPhysicsSystem : MonoBehaviour
                 {
                     gameObjectList[i].Collision(gameObjectList[j]);
                     gameObjectList[j].Collision(gameObjectList[i]);
+                    gameObjectList[j].OnGround = gameObjectList[i].Ground ? true : false;
+                    gameObjectList[i].OnGround = gameObjectList[j].Ground ? true : false;
+                }
+                else
+                {
+                    gameObjectList[j].OnGround = false;
+                    gameObjectList[i].OnGround = false;
                 }
             }
         }
@@ -229,8 +236,9 @@ public class MyPhysicsSystem : MonoBehaviour
             // using dot product find distance between plane and sphere
             // if distance is less than sphere's radius, they collide.
             float distanceBetweenObjs = Vector3.Dot(upvectorOfPlane, positionVectorOfSphere);
-            if(distanceBetweenObjs < second.GetRadius())
+            if (distanceBetweenObjs < second.GetRadius())
             {
+
                 SetCollisionResponse(first, second, first.transform.up);
                 return true;
             }
@@ -313,15 +321,40 @@ public class MyPhysicsSystem : MonoBehaviour
         // finding impulse
         float j = (-1 * (1 + e) * Vector3.Dot(relativeVelocity, normal)) /
             (1 / first.Mass + 1 / second.Mass);
-        Debug.Log("=== " + j);
-        if(!first.Lock)
+
+        // finding friction
+        Vector3 tangentVector = relativeVelocity - (Vector3.Dot(relativeVelocity, normal) * normal);
+        float jt = (-1 * (1 + e) * Vector3.Dot(relativeVelocity, tangentVector)) /
+            (1 / first.Mass + 1 / second.Mass);
+
+        float friction = Mathf.Sqrt(first.Friction*second.Friction);
+        //Debug.Log("impulse = " + j + "friction Im = " + jt);
+        float frictionOffset = Mathf.Abs(friction * j);
+        if(jt < -frictionOffset)
         {
-            first.Velocity = first.Velocity + (j / first.Mass) * normal;
+            jt = -frictionOffset;
+        }
+        else if(jt > frictionOffset)
+        {
+            jt = frictionOffset;
+        }
+       // Debug.Log("impulse = " + j + "friction Im = " + jt);
+        //j = j - jt;
+        Vector3 fVF;
+        Vector3 fVS;
+        if (!first.Lock)
+        {
+            fVF = first.Velocity + (j / first.Mass) * normal;
+            //fVF = fVF + (jt / first.Mass) * tangentVector;
+            first.Velocity = fVF;
         }
         if(!second.Lock)
         {
-            second.Velocity = second.Velocity - (j / second.Mass) * normal;
-            Debug.Log("=== " + (j / second.Mass) * normal);
+            fVS = second.Velocity - (j / second.Mass) * normal;
+            //fVS = fVS - (jt / second.Mass) * tangentVector;
+            second.Velocity = fVS;
+            //Debug.Log("=== " + second.Velocity);
         }
+
     }
 }

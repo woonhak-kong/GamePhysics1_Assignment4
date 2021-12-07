@@ -15,13 +15,14 @@ public class MyPhysicObject : MonoBehaviour
     public float Mass;
     public Vector3 Velocity;
     public CollisionShapeE shape;
-    public float Bounciness;
+    public float Bounciness = 1.0f;
+    public float Friction = 1.0f;
     public bool Lock = false;
+    public bool Ground = false;
 
 
     private float radius = 0.0f;
 
-    private Vector3 PreviousPosition;
     public Vector3 NewPosition;
 
     public bool Pause { get; set; } = false;
@@ -33,7 +34,7 @@ public class MyPhysicObject : MonoBehaviour
     public Vector3 forward { get; } = new Vector3(0, 0, 1);
     public Vector3 back { get; } = new Vector3(0, 0, -1);
 
-
+    public bool OnGround { get; set; }
     // Start is called before the first frame update
     void Start()
     {
@@ -59,16 +60,20 @@ public class MyPhysicObject : MonoBehaviour
             {
                 if (!Lock)
                 {
-                    PreviousPosition = transform.position;
                     transform.position = NewPosition;
 
 
 
                     Velocity.y = Velocity.y + Vector3.down.y * MyPhysicsSystem.GRAVITY * Time.deltaTime;
+                    //Debug.Log("=== " + Velocity.y);
                     //Velocity.x = Velocity.x * Time.deltaTime * 0.001f;
                     //Velocity.z = Velocity.z * Time.deltaTime * 0.001f;
+                    NewPosition.x = transform.position.x + Velocity.x * Time.deltaTime;
+                    if(!(OnGround && Velocity.y < 0))
+                        NewPosition.y = transform.position.y + Velocity.y * Time.deltaTime;
+                    NewPosition.z = transform.position.z + Velocity.z * Time.deltaTime;
 
-                    NewPosition = transform.position + Velocity * Time.deltaTime;
+                    //NewPosition = transform.position + Velocity * Time.deltaTime;
                 }
             }
             //if (!Pause)

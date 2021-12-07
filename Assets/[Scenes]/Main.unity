@@ -144,7 +144,9 @@ MonoBehaviour:
   Velocity: {x: 0, y: 0, z: 0}
   shape: 1
   Bounciness: 1
+  Friction: 0
   Lock: 1
+  Ground: 0
   NewPosition: {x: 0, y: 0, z: 0}
 --- !u!1001 &128655077
 PrefabInstance:
@@ -155,7 +157,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1072224599, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: Bounciness
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8145716382312423215, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: m_Name
@@ -171,7 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8627208550951912754, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.64
+      value: -1.445
       objectReference: {fileID: 0}
     - target: {fileID: 8627208550951912754, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: m_LocalPosition.y
@@ -246,7 +248,9 @@ MonoBehaviour:
   Velocity: {x: 2, y: 0, z: 0}
   shape: 2
   Bounciness: 1
+  Friction: 0
   Lock: 0
+  Ground: 0
   NewPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &208884917
 MeshRenderer:
@@ -321,7 +325,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1072224599, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: Bounciness
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1072224599, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: Velocity.z
@@ -333,7 +337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8145716382312423215, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8627208550951912754, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: m_RootOrder
@@ -345,7 +349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8627208550951912754, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.93
+      value: 5.307
       objectReference: {fileID: 0}
     - target: {fileID: 8627208550951912754, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: m_LocalPosition.z
@@ -411,7 +415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectList: []
-  Gravity: 0
+  Gravity: 10
 --- !u!4 &310071502
 Transform:
   m_ObjectHideFlags: 0
@@ -461,7 +465,9 @@ MonoBehaviour:
   Velocity: {x: 0, y: 0, z: 2}
   shape: 2
   Bounciness: 1
+  Friction: 0
   Lock: 0
+  Ground: 0
   NewPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &331748032
 MeshRenderer:
@@ -548,7 +554,9 @@ MonoBehaviour:
   Velocity: {x: 0, y: 0, z: 0}
   shape: 1
   Bounciness: 1
+  Friction: 0
   Lock: 1
+  Ground: 0
   NewPosition: {x: 0, y: 0, z: 0}
 --- !u!1001 &645009609
 PrefabInstance:
@@ -559,7 +567,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1072224599, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: Bounciness
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8145716382312423215, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: m_Name
@@ -717,7 +725,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1072224599, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: Bounciness
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8145716382312423215, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: m_Name
@@ -794,7 +802,9 @@ MonoBehaviour:
   Velocity: {x: 0, y: 0, z: 0}
   shape: 1
   Bounciness: 1
+  Friction: 0
   Lock: 1
+  Ground: 0
   NewPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &806648559
 GameObject:
@@ -831,7 +841,9 @@ MonoBehaviour:
   Velocity: {x: 0, y: 0, z: 0}
   shape: 2
   Bounciness: 1
+  Friction: 0
   Lock: 0
+  Ground: 0
   NewPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &806648561
 MeshRenderer:
@@ -906,7 +918,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1072224599, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: Bounciness
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8145716382312423215, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: m_Name
@@ -1080,7 +1092,9 @@ MonoBehaviour:
   Velocity: {x: 2, y: 0, z: 0}
   shape: 2
   Bounciness: 0.5
+  Friction: 0
   Lock: 0
+  Ground: 0
   NewPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &999083710
 MeshRenderer:
@@ -1154,8 +1168,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1072224599, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
+      propertyPath: Friction
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072224599, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: Bounciness
-      value: 0.5
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072224599, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
+      propertyPath: Velocity.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072224599, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
+      propertyPath: Velocity.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8145716382312423215, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: m_Name
@@ -1163,7 +1189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8145716382312423215, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8627208550951912754, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: m_RootOrder
@@ -1171,11 +1197,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8627208550951912754, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.2
+      value: -3.36
       objectReference: {fileID: 0}
     - target: {fileID: 8627208550951912754, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.93
+      value: 3.25
       objectReference: {fileID: 0}
     - target: {fileID: 8627208550951912754, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1220,7 +1246,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1072224599, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: Bounciness
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8145716382312423215, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: m_Name
@@ -1285,11 +1311,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1072224599, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: Bounciness
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1072224599, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: Velocity.x
-      value: 0
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 1072224599, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: Velocity.z
@@ -1301,7 +1327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8145716382312423215, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8627208550951912754, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: m_RootOrder
@@ -1384,7 +1410,9 @@ MonoBehaviour:
   Velocity: {x: 2, y: 0, z: 2}
   shape: 2
   Bounciness: 1
+  Friction: 0
   Lock: 0
+  Ground: 0
   NewPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &1262522834
 MeshRenderer:
@@ -1482,10 +1510,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mass: 10
-  Velocity: {x: 0, y: 0, z: 0}
+  Velocity: {x: 2, y: 0, z: 0}
   shape: 2
-  Bounciness: 1
+  Bounciness: 0.5
+  Friction: 0.1
   Lock: 0
+  Ground: 0
   NewPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &1283027119
 MeshRenderer:
@@ -1545,7 +1575,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1283027117}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.128, y: 4.831, z: 0.64}
+  m_LocalPosition: {x: -2.49, y: 4.831, z: 0.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1586,7 +1616,9 @@ MonoBehaviour:
   Velocity: {x: 2, y: 0, z: 0}
   shape: 2
   Bounciness: 1
+  Friction: 0
   Lock: 0
+  Ground: 0
   NewPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &1348195225
 MeshRenderer:
@@ -1673,7 +1705,9 @@ MonoBehaviour:
   Velocity: {x: 0, y: 0, z: 0}
   shape: 1
   Bounciness: 1
+  Friction: 0
   Lock: 1
+  Ground: 0
   NewPosition: {x: 0, y: 0, z: 0}
 --- !u!1001 &1442424663
 PrefabInstance:
@@ -1684,7 +1718,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1072224599, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: Bounciness
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8145716382312423215, guid: 514a55a28199c8f4cbf740e31a7b1b46, type: 3}
       propertyPath: m_Name
@@ -1836,7 +1870,9 @@ MonoBehaviour:
   Velocity: {x: 2, y: 0, z: 0}
   shape: 2
   Bounciness: 0.5
+  Friction: 0
   Lock: 0
+  Ground: 0
   NewPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &1781479593
 MeshRenderer:
@@ -1922,8 +1958,10 @@ MonoBehaviour:
   Mass: 10
   Velocity: {x: 0, y: 0, z: 0}
   shape: 1
-  Bounciness: 0.5
+  Bounciness: 1
+  Friction: 1
   Lock: 1
+  Ground: 1
   NewPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1927823029
 GameObject:
@@ -1960,7 +1998,9 @@ MonoBehaviour:
   Velocity: {x: 2, y: 0, z: 2}
   shape: 2
   Bounciness: 0.5
+  Friction: 0
   Lock: 0
+  Ground: 0
   NewPosition: {x: 0, y: 0, z: 0}
 --- !u!23 &1927823031
 MeshRenderer:
