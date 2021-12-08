@@ -51,8 +51,7 @@ public class MyPhysicObject : MonoBehaviour
         NewPosition = transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateObject()
     {
         if (shape != CollisionShapeE.PLANE)
         {
@@ -70,7 +69,7 @@ public class MyPhysicObject : MonoBehaviour
                     //Velocity.z = Velocity.z * Time.deltaTime * 0.001f;
                     NewPosition.x = transform.position.x + Velocity.x * Time.deltaTime;
 
-                        NewPosition.y = transform.position.y + Velocity.y * Time.deltaTime;
+                    NewPosition.y = transform.position.y + Velocity.y * Time.deltaTime;
                     NewPosition.z = transform.position.z + Velocity.z * Time.deltaTime;
 
                     //NewPosition = transform.position + Velocity * Time.deltaTime;

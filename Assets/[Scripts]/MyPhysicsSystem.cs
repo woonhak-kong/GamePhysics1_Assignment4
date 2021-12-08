@@ -35,10 +35,7 @@ public class MyPhysicsSystem : MonoBehaviour
     {
         foreach (MyPhysicObject obj in gameObjectList)
         {
-            //float newPositionY = obj.transform.position.y + gravity * Time.deltaTime * 0.1f;
-            //obj.transform.position = new Vector3(obj.transform.position.x, newPositionY, 0);
-            //Vector3 newAccelerationVector3 = obj.GetComponent<MyPhysicObject>().Velocity + Vector3.down * gravity * Time.deltaTime;
-            //obj.GetComponent<MyPhysicObject>().Velocity = newAccelerationVector3;
+            obj.UpdateObject();
         }
 
         DetectCollision();
