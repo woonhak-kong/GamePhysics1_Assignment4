@@ -97,18 +97,18 @@ public class MyPhysicObject : MonoBehaviour
     {
         //Debug.Log("Collision!! with " + otherObj.name);
 
-        if (OnGround)
-        {
-            //NewPosition.x = transform.position.x;
-            NewPosition.y = transform.position.y;
-            //NewPosition.z = transform.position.z;
-            //Debug.Log("==== ground and vel");
-        }
-        else
-        {
-            NewPosition = transform.position;
-            //Debug.Log("==== why??");
-        }
+        //if (OnGround)
+        //{
+        //    //NewPosition.x = transform.position.x;
+        //    NewPosition.y = transform.position.y;
+        //    //NewPosition.z = transform.position.z;
+        //    //Debug.Log("==== ground and vel");
+        //}
+        //else
+        //{
+        //    NewPosition = transform.position;
+        //    //Debug.Log("==== why??");
+        //}
         //if (!(OnGround && Velocity.y < 0))
         //{
         //    //NewPosition.x = transform.position.x;

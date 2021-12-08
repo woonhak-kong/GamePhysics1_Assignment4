@@ -220,7 +220,7 @@ public class MyPhysicsSystem : MonoBehaviour
 
             if( distanceSquared < radiusSquared)
             {
-                Vector3 normalFirst = (first.GetNewPosition() - closestPoint).normalized;
+                Vector3 normalFirst = differenceVector.normalized;
                 SetCollisionResponse(first, second, -normalFirst);
 
                 return true;
@@ -319,34 +319,61 @@ public class MyPhysicsSystem : MonoBehaviour
         // finding impulse
         float j = (-1 * (1 + e) * Vector3.Dot(relativeVelocity, normal)) /
             (1 / first.Mass + 1 / second.Mass);
+        //j = j == 0 ? 0.001f : j;
 
         e = (first.Friction + second.Friction)/ 2;
         // finding friction
         Vector3 tangentVector = relativeVelocity - (Vector3.Dot(relativeVelocity, normal) * normal);
+        Vector3 tangentVectorNormal;
+        tangentVectorNormal.x = Mathf.Abs(tangentVector.normalized.x);
+        tangentVectorNormal.y = Mathf.Abs(tangentVector.normalized.y);
+        tangentVectorNormal.z = Mathf.Abs(tangentVector.normalized.z);
         float jt = (-1 * (1 + e) * Vector3.Dot(relativeVelocity, tangentVector)) /
             (1 / first.Mass + 1 / second.Mass);
 
         //Debug.Log("Vel Unit = " + second.Velocity.normalized);
-        //Debug.Log("tangetV Unit = " + tangentVector.normalized);
-        //Debug.Log("impulse = " + j + "friction Im = " + jt);
+
+        Debug.Log("relativeVelocity = " + relativeVelocity);
 
         float frictionU = Mathf.Sqrt(first.Friction*second.Friction);
         float umg = frictionU * second.Mass * GRAVITY;
         float aceel = umg / second.Mass;
         if (!first.Lock)
         {
+            first.NewPosition.x = first.transform.position.x + first.Velocity.x * tangentVectorNormal.x * Time.deltaTime;
+            first.NewPosition.y = first.transform.position.y + first.Velocity.y * tangentVectorNormal.y * Time.deltaTime;
+            first.NewPosition.z = first.transform.position.z + first.Velocity.z * tangentVectorNormal.z * Time.deltaTime;
+
             // impulse
             first.Velocity = first.Velocity + (j / first.Mass) * normal;
+            if(j == 0)
+            {
+                first.Velocity.y = 0;
+            }
+            //Debug.Log("Velocity before  " + first.Velocity);
             // frictio
             first.Velocity = first.Velocity - tangentVector.normalized * aceel * Time.deltaTime;
+            //Debug.Log("Velocity after   " + first.Velocity);
+            // Debug.Log("tangetV Unit = " + -tangentVector.normalized);
+            //Debug.Log("first tangetV Unit = " + -tangentVector.normalized);
+
         }
         if(!second.Lock)
         {
+            //second.NewPosition = first.transform.position;
+            second.NewPosition.x = second.transform.position.x + second.Velocity.x * tangentVectorNormal.x * Time.deltaTime;
+            second.NewPosition.y = second.transform.position.y + second.Velocity.y * tangentVectorNormal.y * Time.deltaTime;
+            second.NewPosition.z = second.transform.position.z + second.Velocity.z * tangentVectorNormal.z * Time.deltaTime;
+            //Debug.Log("second tangetV Unit = " + (second.transform.position.x + second.Velocity.x * -tangentVector.normalized.x * Time.deltaTime));
             // impulse
             second.Velocity = second.Velocity - (j / second.Mass) * normal;
+            if (j == 0)
+            {
+                second.Velocity.y = 0;
+            }
             // friction
             second.Velocity = second.Velocity + tangentVector.normalized * aceel * Time.deltaTime;
-            Debug.Log("=========   " + second.Velocity);
+            //Debug.Log("=========   " + tangentVector);
 
         }
 
