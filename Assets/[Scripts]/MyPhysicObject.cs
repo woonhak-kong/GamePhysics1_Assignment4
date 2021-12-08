@@ -122,7 +122,7 @@ public class MyPhysicObject : MonoBehaviour
         //InitVelocity();
         if (shape != CollisionShapeE.PLANE)
         {
-            ChagneMaterialColorRandom();
+            //ChagneMaterialColorRandom();
         }
         //Pause = true;
     }
