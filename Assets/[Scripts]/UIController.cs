@@ -96,6 +96,15 @@ public class UIController : MonoBehaviour
             + "\n" + gameController.spherePrefab.GetComponent<MyPhysicObject>().Friction.ToString();
     }
 
+    public void OnClickWoodBox()
+    {
+        gameController.spherePrefab = gameController.woodBox;
+        equipedBall.text = "WoodBox";
+        information.text = gameController.spherePrefab.GetComponent<MyPhysicObject>().Mass.ToString()
+            + "\n" + gameController.spherePrefab.GetComponent<MyPhysicObject>().Bounciness.ToString()
+            + "\n" + gameController.spherePrefab.GetComponent<MyPhysicObject>().Friction.ToString();
+    }
+
     public void OnChangeGravitySlider(Slider slider)
     {
         gravityValue.text = slider.value.ToString();
@@ -109,7 +118,6 @@ public class UIController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
     }
-
 
     public void OnClickStart()
     {

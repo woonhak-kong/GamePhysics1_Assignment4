@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public GameObject baseBall;
     public GameObject basketBall;
     public GameObject bowlingBall;
+    public GameObject woodBox;
     public float FiringDelayTimeInSecond = 1;
     public float Offset;
     public float LauchSpeed;

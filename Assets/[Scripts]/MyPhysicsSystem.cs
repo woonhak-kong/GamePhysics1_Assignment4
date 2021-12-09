@@ -144,7 +144,7 @@ public class MyPhysicsSystem : MonoBehaviour
             float distanceBetweenObjs = Mathf.Sqrt(subResult.x * subResult.x + subResult.y * subResult.y + subResult.z * subResult.z);
 
             // when the distance between two objects is less than the sum of two objects' radious, they collided.
-            if(distanceBetweenObjs < first.GetRadius() + second.GetRadius())
+            if(distanceBetweenObjs < (first.GetRadius() + second.GetRadius()) + 0.01f)
             {
                 SetCollisionResponse(first, second, subResult.normalized);
                 return true;
@@ -221,7 +221,7 @@ public class MyPhysicsSystem : MonoBehaviour
 
             // magnitude for checking collision
             float distanceSquared = differenceVector.sqrMagnitude;
-            float radiusSquared = first.GetRadius() * first.GetRadius();
+            float radiusSquared = (first.GetRadius() * first.GetRadius()) + 0.1f;
 
             if( distanceSquared < radiusSquared)
             {
@@ -318,8 +318,8 @@ public class MyPhysicsSystem : MonoBehaviour
 
     private void SetCollisionResponse(MyPhysicObject first, MyPhysicObject second, Vector3 normal)
     {
-        //float e = Mathf.Min(first.Bounciness, second.Bounciness);
-        float e = (first.Bounciness + second.Bounciness) * 0.5f;
+        float e = Mathf.Min(first.Bounciness, second.Bounciness);
+        //float e = (first.Bounciness + second.Bounciness) * 0.5f;
         Vector3 relativeVelocity = first.Velocity - second.Velocity;
 
         // finding impulse
