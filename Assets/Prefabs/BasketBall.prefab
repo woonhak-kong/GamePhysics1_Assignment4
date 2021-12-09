@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mass: 625
-  Velocity: {x: 10, y: 0, z: 0}
+  Velocity: {x: 0, y: 0, z: 0}
   shape: 0
   Bounciness: 0.7
   Friction: 0.8
