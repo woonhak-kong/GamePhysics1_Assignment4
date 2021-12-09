@@ -158,7 +158,7 @@ MonoBehaviour:
   Mass: 3000
   Velocity: {x: 0, y: 0, z: 0}
   shape: 2
-  Bounciness: 0.2
+  Bounciness: 0.3
   Friction: 0.9
   Lock: 0
   Ground: 0

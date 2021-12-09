@@ -313,31 +313,24 @@ public class MyPhysicsSystem : MonoBehaviour
 
     private void SetCollisionResponse(MyPhysicObject first, MyPhysicObject second, Vector3 normal)
     {
-        float e = Mathf.Min(first.Bounciness, second.Bounciness);
+        //float e = Mathf.Min(first.Bounciness, second.Bounciness);
+        float e = (first.Bounciness + second.Bounciness) * 0.5f;
         Vector3 relativeVelocity = first.Velocity - second.Velocity;
 
         // finding impulse
         float j = (-1 * (1 + e) * Vector3.Dot(relativeVelocity, normal)) /
             (1 / first.Mass + 1 / second.Mass);
-        //j = j == 0 ? 0.001f : j;
 
-        e = (first.Friction + second.Friction)/ 2;
         // finding friction
         Vector3 tangentVector = relativeVelocity - (Vector3.Dot(relativeVelocity, normal) * normal);
         Vector3 tangentVectorNormal;
         tangentVectorNormal.x = Mathf.Abs(tangentVector.normalized.x);
         tangentVectorNormal.y = Mathf.Abs(tangentVector.normalized.y);
         tangentVectorNormal.z = Mathf.Abs(tangentVector.normalized.z);
-        float jt = (-1 * (1 + e) * Vector3.Dot(relativeVelocity, tangentVector)) /
-            (1 / first.Mass + 1 / second.Mass);
-
-        //Debug.Log("Vel Unit = " + second.Velocity.normalized);
-
-        Debug.Log("relativeVelocity = " + relativeVelocity);
-
         float frictionU = Mathf.Sqrt(first.Friction*second.Friction);
         float umg = frictionU * second.Mass * GRAVITY;
         float aceel = umg / second.Mass;
+
         if (!first.Lock)
         {
             first.NewPosition.x = first.transform.position.x + first.Velocity.x * tangentVectorNormal.x * Time.deltaTime;
