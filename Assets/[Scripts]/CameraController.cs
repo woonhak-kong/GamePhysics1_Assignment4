@@ -28,15 +28,16 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (!panel.activeInHierarchy)
-        //{
+        if (Cursor.lockState == CursorLockMode.Locked)
+        {
             MouseLook();
             Move();
-        //}
+        }
     }
 
     private void Move()
     {
+
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
         float z = Input.GetAxisRaw("Up");
@@ -45,6 +46,7 @@ public class CameraController : MonoBehaviour
         Vector3 moveSideways = Vector3.MoveTowards(Vector3.zero, transform.right * maxSpeed, x * maxSpeed * Time.deltaTime);
         Vector3 moveUp = Vector3.MoveTowards(Vector3.zero, transform.up * maxSpeed, z * maxSpeed * Time.deltaTime);
         transform.position += moveForward + moveSideways + moveUp;
+
     }
 
     private void MouseLook()

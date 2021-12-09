@@ -11,18 +11,32 @@ public class UIController : MonoBehaviour
 {
     [Header("UI Controls")]
     public GameObject panel;
-    public Toggle gravityCheckBox;
-    public Slider gravityScaleSlider;
-    public InputField gravityScaleInputField;
+    //public Slider gravityScaleSlider;
+    public Text gravityValue;
+    public Text information;
+    public Text equipedBall;
+
+    public GameController gameController;
+    public MyPhysicsSystem myPhysicsSystem;
+
+    public GameObject buttonsBox;
+    public GameObject informationBox;
+
+    public Button startButton;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        panel.SetActive(false);
+        //panel.SetActive(false);
 
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.None;
 
-        gravityScaleInputField.text = gravityScaleSlider.value.ToString();
+        //gravityScaleInputField.text = gravityScaleSlider.value.ToString();
+        equipedBall.text = gameController.spherePrefab.name;
+        information.text = gameController.spherePrefab.GetComponent<MyPhysicObject>().Mass.ToString()
+            + "\n" + gameController.spherePrefab.GetComponent<MyPhysicObject>().Bounciness.ToString()
+            + "\n" + gameController.spherePrefab.GetComponent<MyPhysicObject>().Friction.ToString();
     }
 
     // Update is called once per frame
@@ -30,12 +44,64 @@ public class UIController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.BackQuote))
         {
-            panel.SetActive(!panel.activeInHierarchy); // toggle
+            //panel.SetActive(!panel.activeInHierarchy); // toggle
 
-            Cursor.lockState = (panel.activeInHierarchy) ? CursorLockMode.None : CursorLockMode.Locked;
+            Cursor.lockState = (Cursor.lockState == CursorLockMode.Locked) ? CursorLockMode.None : CursorLockMode.Locked;
+            if (Cursor.lockState == CursorLockMode.Locked)
+            {
+                buttonsBox.SetActive(false);
+            }
+            else
+            {
+                buttonsBox.SetActive(true);
+            }
         }
 
     }
+
+    public void OnClickPingPong()
+    {
+        gameController.spherePrefab = gameController.pingpongBall;
+        equipedBall.text = "PingPongBall";
+        information.text = gameController.spherePrefab.GetComponent<MyPhysicObject>().Mass.ToString()
+            + "\n" + gameController.spherePrefab.GetComponent<MyPhysicObject>().Bounciness.ToString()
+            + "\n" + gameController.spherePrefab.GetComponent<MyPhysicObject>().Friction.ToString();
+
+    }
+
+    public void OnClickBaseBall()
+    {
+        gameController.spherePrefab = gameController.baseBall;
+        equipedBall.text = "BaseBall";
+        information.text = gameController.spherePrefab.GetComponent<MyPhysicObject>().Mass.ToString()
+            + "\n" + gameController.spherePrefab.GetComponent<MyPhysicObject>().Bounciness.ToString()
+            + "\n" + gameController.spherePrefab.GetComponent<MyPhysicObject>().Friction.ToString();
+    }
+
+    public void OnClickBasketBall()
+    {
+        gameController.spherePrefab = gameController.basketBall;
+        equipedBall.text = "BasketBall";
+        information.text = gameController.spherePrefab.GetComponent<MyPhysicObject>().Mass.ToString()
+            + "\n" + gameController.spherePrefab.GetComponent<MyPhysicObject>().Bounciness.ToString()
+            + "\n" + gameController.spherePrefab.GetComponent<MyPhysicObject>().Friction.ToString();
+    }
+
+    public void OnClickBowlingBall()
+    {
+        gameController.spherePrefab = gameController.bowlingBall;
+        equipedBall.text = "BowlingBall";
+        information.text = gameController.spherePrefab.GetComponent<MyPhysicObject>().Mass.ToString()
+            + "\n" + gameController.spherePrefab.GetComponent<MyPhysicObject>().Bounciness.ToString()
+            + "\n" + gameController.spherePrefab.GetComponent<MyPhysicObject>().Friction.ToString();
+    }
+
+    public void OnChangeGravitySlider(Slider slider)
+    {
+        gravityValue.text = slider.value.ToString();
+        myPhysicsSystem.Gravity = slider.value;
+    }
+
 
     public void OnOKButtonPressed()
     {
@@ -44,18 +110,11 @@ public class UIController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    public void OnGravityToggled()
-    {
-        Debug.Log(gravityCheckBox.isOn ? "Gravity is On" : "Gravity is Off");
-    }
 
-    public void OnGravityScaleSliderValueChanged()
+    public void OnClickStart()
     {
-        gravityScaleInputField.text = gravityScaleSlider.value.ToString();
-    }
-
-    public void OnGravityScaleTextFieldValueChanged()
-    {
-        gravityScaleSlider.value = Single.TryParse(gravityScaleInputField.text, out var number) ? number : 0.0f;
+        informationBox.SetActive(true);
+        startButton.gameObject.SetActive(false);
+        myPhysicsSystem.IsStart = true;
     }
 }

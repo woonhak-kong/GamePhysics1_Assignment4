@@ -10,6 +10,8 @@ public class MyPhysicsSystem : MonoBehaviour
     public float Gravity = 9.81f;
     public static float GRAVITY;
 
+    public bool IsStart { get; set; } = false;
+
     enum CubeAxis{
         LEFT = 0,
         RIGHT,
@@ -33,12 +35,15 @@ public class MyPhysicsSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (MyPhysicObject obj in gameObjectList)
+        if (IsStart)
         {
-            obj.UpdateObject();
+            GRAVITY = Gravity;
+            foreach (MyPhysicObject obj in gameObjectList)
+            {
+                obj.UpdateObject();
+            }
+            DetectCollision();
         }
-
-        DetectCollision();
     }
 
     void DetectCollision()
